@@ -1,22 +1,33 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#020915"><title>JARVIS v0.7</title>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#020915"><title>JARVIS v0.9.1</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#020915;color:#aeefff;font-family:Arial,sans-serif}
 body{display:flex;flex-direction:column;justify-content:center;align-items:center;background:radial-gradient(ellipse at center,#103451 0%,#06182b 44%,#020915 78%)}
 .hud{position:relative;width:min(90vw,470px);aspect-ratio:1;display:grid;place-items:center;filter:drop-shadow(0 0 14px #008eea)}
 .ring{position:absolute;border-radius:50%;pointer-events:none}
 .outer{inset:1%;border:1px solid #37d5ff88;box-shadow:0 0 17px #00baff44,inset 0 0 20px #00baff33}
-.ticks{inset:2%;background:repeating-conic-gradient(from 0deg,#7eeeffaa 0deg .5deg,transparent .5deg 4deg);-webkit-mask:radial-gradient(circle,transparent 66%,#000 67% 69%,transparent 70%);mask:radial-gradient(circle,transparent 66%,#000 67% 69%,transparent 70%);animation:spin 80s linear infinite}
-.arc1{inset:9%;border:7px double #42d8ff;border-left-color:transparent;border-bottom-color:#42d8ff44;animation:spin 26s linear infinite}
-.arc2{inset:16%;border:2px dashed #9cefffaa;animation:spin 38s linear infinite reverse}
-.arc3{inset:23%;border:9px solid #26bfff;border-top-color:transparent;border-right-color:#26bfff44;transform:rotateX(24deg);animation:spin 17s linear infinite}
-.arc4{inset:30%;border:2px dotted #9cffff;animation:spin 12s linear infinite reverse}
-.arc5{inset:36%;border:3px solid #4ad7ff;border-left-color:transparent;border-bottom-color:transparent;animation:spin 9s linear infinite}
+.ticks{inset:2%;background:repeating-conic-gradient(from 0deg,#7eeeffaa 0deg .5deg,transparent .5deg 4deg);-webkit-mask:radial-gradient(circle,transparent 66%,#000 67% 69%,transparent 70%);mask:radial-gradient(circle,transparent 66%,#000 67% 69%,transparent 70%);animation:spin 41.03s linear infinite}
+.arc1{inset:9%;border:7px double #42d8ff;border-left-color:transparent;border-bottom-color:#42d8ff44;animation:spin 13.33s linear infinite}
+.arc2{inset:16%;border:2px dashed #9cefffaa;animation:spin 19.49s linear infinite reverse}
+.arc3{inset:23%;border:9px solid #26bfff;border-top-color:transparent;border-right-color:#26bfff44;transform:rotateX(24deg);animation:spin 8.72s linear infinite}
+.arc4{inset:30%;border:2px dotted #9cffff;animation:spin 6.15s linear infinite reverse}
+.arc5{inset:36%;border:3px solid #4ad7ff;border-left-color:transparent;border-bottom-color:transparent;animation:spin 4.61s linear infinite}
+.arc6{inset:5%;border:1px dashed #76eaff99;border-right-color:transparent;animation:spin 21.33s linear infinite reverse}
+.arc7{inset:27%;border:2px solid #8cefff99;border-top-color:transparent;border-bottom-color:transparent;animation:spin 9.33s linear infinite}
+.arc8{inset:41%;border:1px dotted #b7ffffcc;animation:spin 5.00s linear infinite reverse}
+
+.arc9{inset:3.5%;border:1px dotted #78eaff77;border-left-color:transparent;animation:spin 30s linear infinite}
+.arc10{inset:13.5%;border:3px solid #56dfff99;border-top-color:transparent;border-bottom-color:transparent;animation:spin 18s linear infinite reverse}
+.arc11{inset:20%;border:1px dashed #c1ffff99;animation:spin 11s linear infinite}
+.arc12{inset:33%;border:3px double #5cdfffaa;border-left-color:transparent;animation:spin 7s linear infinite reverse}
+.arc13{inset:44%;border:1px solid #b9ffff99;border-right-color:transparent;animation:spin 5s linear infinite}
+.marks{inset:6%;background:repeating-conic-gradient(#8defffbb 0deg .25deg,transparent .25deg 2deg);-webkit-mask:radial-gradient(circle,transparent 80%,#000 81% 82%,transparent 83%);mask:radial-gradient(circle,transparent 80%,#000 81% 82%,transparent 83%);animation:spin 44s linear infinite reverse}
+.scanner{inset:18%;background:conic-gradient(from 30deg,transparent 0deg 260deg,#00baff00 290deg,#55faff77 307deg,transparent 317deg);border-radius:50%;animation:spin 15s linear infinite;opacity:.55;pointer-events:none}
 .orbit{inset:12%;border:1px solid #5fdfff55;transform:rotateX(64deg) rotate(-23deg);box-shadow:0 0 14px #008bff66}
 .orbit.b{inset:17%;transform:rotateY(62deg) rotate(26deg)}
-.core{width:24%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#d8ffff 0%,#6cf2ff 11%,#00a7eb 25%,#005493 53%,#001328 76%);box-shadow:0 0 30px #00cfff,0 0 65px #0088ff88;animation:breathe 4.8s ease-in-out infinite}
-.core:after{content:"";display:block;width:100%;height:100%;border-radius:50%;border:2px dotted #d5ffffaa;animation:spin 13s linear infinite}
+.core{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:24%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#d8ffff 0%,#6cf2ff 11%,#00a7eb 25%,#005493 53%,#001328 76%);box-shadow:0 0 30px #00cfff,0 0 65px #0088ff88;animation:breathe 4.8s ease-in-out infinite}
+.core:after{content:"";display:block;width:100%;height:100%;border-radius:50%;border:2px dotted #d5ffffaa;animation:spin 6.67s linear infinite}
 h1{font-size:14px;font-weight:400;letter-spacing:.32em;margin:24px 0 10px}
 p{font-size:11px;letter-spacing:.12em;color:#83b7ca;margin:0}
 @keyframes spin{to{rotate:360deg}}@keyframes breathe{0%,100%{scale:.94;filter:brightness(.85)}50%{scale:1.09;filter:brightness(1.4)}}
-@media(prefers-reduced-motion:reduce){.ticks,.arc1,.arc2,.arc3,.arc4,.arc5,.core,.core:after{animation:none}}
-</style></head><body><main class="hud" aria-label="青い多層ホログラムリング"><div class="ring outer"></div><div class="ring ticks"></div><div class="ring arc1"></div><div class="ring arc2"></div><div class="ring arc3"></div><div class="ring arc4"></div><div class="ring arc5"></div><div class="ring orbit"></div><div class="ring orbit b"></div><div class="core"></div></main><h1>J A R V I S · 0.7</h1><p>HOLOGRAPHIC INTERFACE · STANDBY</p></body></html>
+@media(prefers-reduced-motion:reduce){.ticks,.arc1,.arc2,.arc3,.arc4,.arc5,.arc6,.arc7,.arc8,.arc9,.arc10,.arc11,.arc12,.arc13,.marks,.scanner,.core,.core:after{animation:none}}
+</style></head><body><main class="hud" aria-label="青い多層ホログラムリング"><div class="ring outer"></div><div class="ring ticks"></div><div class="ring arc1"></div><div class="ring arc2"></div><div class="ring arc3"></div><div class="ring arc4"></div><div class="ring arc5"></div><div class="ring arc6"></div><div class="ring arc7"></div><div class="ring arc8"></div><div class="ring arc9"></div><div class="ring arc10"></div><div class="ring arc11"></div><div class="ring arc12"></div><div class="ring arc13"></div><div class="ring marks"></div><div class="scanner"></div><div class="ring orbit"></div><div class="ring orbit b"></div><div class="core"></div></main><h1>J A R V I S · 0.9.1</h1><p>HOLOGRAPHIC INTERFACE · STANDBY</p></body></html>
