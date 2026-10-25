@@ -1,21 +1,22 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#020915"><title>JARVIS v0.6</title><style>
-*{box-sizing:border-box}html,body{margin:0;height:100%;background:#020915;color:#b7edff;font-family:Arial,sans-serif}body{display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at center,#12304c,#020915 72%);overflow:hidden}.hud{position:relative;width:min(86vw,440px);aspect-ratio:1;display:grid;place-items:center;--level:0;filter:drop-shadow(0 0 14px #009dff)}.ring{position:absolute;border-radius:50%;border:2px solid #38caff;box-shadow:0 0 13px #00bfff88,inset 0 0 10px #00bfff55}.r1{inset:2%;border-style:dashed;animation:spin 31s linear infinite}.r2{inset:12%;border:7px double #39d9ff;border-left-color:transparent;animation:spin 19s linear infinite reverse}.r3{inset:23%;border:3px dotted #92faff;animation:spin 12s linear infinite}.r4{inset:32%;border:5px solid #2bbdff;border-top-color:transparent;animation:spin 8s linear infinite reverse}.ticks{position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(#73e8ffbb 0deg .5deg,transparent .5deg 5deg);mask:radial-gradient(circle,transparent 65%,black 66%,black 68%,transparent 69%);animation:spin 65s linear infinite}.core{width:29%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#e2ffff,#2ccfff 18%,#005fa9 44%,#001329 76%);box-shadow:0 0 calc(22px + var(--level)*60px) #00cfff,0 0 70px #007bff;transform:scale(calc(1 + var(--level)*.42));transition:transform .07s linear,box-shadow .07s linear;animation:breath 4s ease-in-out infinite}.hud.listening .ring{filter:brightness(calc(1 + var(--level)*2))}.ripple{position:absolute;inset:32%;border:2px solid #bfffff;border-radius:50%;opacity:0;pointer-events:none}.hud.pulse .ripple{animation:ripple .8s ease-out}h1{font-size:14px;letter-spacing:.35em;font-weight:400;margin:26px 0 14px}button{background:#06283c;border:1px solid #34cfff;border-radius:24px;color:#c5f7ff;padding:13px 22px;font-size:15px}#status{font-size:12px;min-height:40px;margin:15px 22px;text-align:center;color:#8ac3d5} @keyframes spin{to{transform:rotate(360deg)}}@keyframes breath{50%{filter:brightness(1.35)}}@keyframes ripple{0%{opacity:1;transform:scale(.6)}100%{opacity:0;transform:scale(3)}}@media(prefers-reduced-motion:reduce){.ring,.ticks,.core{animation:none}}
-</style></head><body><div class="hud" id="hud" aria-label="アニメーションリング"><div class="ticks"></div><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><div class="ring r4"></div><div class="core"></div><div class="ripple"></div></div><h1>J A R V I S · 0.6</h1><p id="status" role="status">自動発光中 · マイクは使用しません</p><script>
-const hud=document.getElementById('hud');
-
-const status=document.getElementById('status');
-let raf=0, started=performance.now();
-function frame(t){
-
-  const x=(t-started)/1000;
-  const level=Math.min(1,Math.max(0,.35+.19*Math.sin(x*1.45)+.06*Math.sin(x*.63)));
-  hud.style.setProperty('--level',level.toFixed(3));
-  raf=requestAnimationFrame(frame);
-}
-
-raf=requestAnimationFrame(frame);
-hud.addEventListener('click',()=>{
-  hud.classList.remove('pulse');void hud.offsetWidth;hud.classList.add('pulse');
-});
-document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(raf);else {started=performance.now();raf=requestAnimationFrame(frame)}});
-</script></body></html>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#020915"><title>JARVIS v0.7</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#020915;color:#aeefff;font-family:Arial,sans-serif}
+body{display:flex;flex-direction:column;justify-content:center;align-items:center;background:radial-gradient(ellipse at center,#103451 0%,#06182b 44%,#020915 78%)}
+.hud{position:relative;width:min(90vw,470px);aspect-ratio:1;display:grid;place-items:center;filter:drop-shadow(0 0 14px #008eea)}
+.ring{position:absolute;border-radius:50%;pointer-events:none}
+.outer{inset:1%;border:1px solid #37d5ff88;box-shadow:0 0 17px #00baff44,inset 0 0 20px #00baff33}
+.ticks{inset:2%;background:repeating-conic-gradient(from 0deg,#7eeeffaa 0deg .5deg,transparent .5deg 4deg);-webkit-mask:radial-gradient(circle,transparent 66%,#000 67% 69%,transparent 70%);mask:radial-gradient(circle,transparent 66%,#000 67% 69%,transparent 70%);animation:spin 80s linear infinite}
+.arc1{inset:9%;border:7px double #42d8ff;border-left-color:transparent;border-bottom-color:#42d8ff44;animation:spin 26s linear infinite}
+.arc2{inset:16%;border:2px dashed #9cefffaa;animation:spin 38s linear infinite reverse}
+.arc3{inset:23%;border:9px solid #26bfff;border-top-color:transparent;border-right-color:#26bfff44;transform:rotateX(24deg);animation:spin 17s linear infinite}
+.arc4{inset:30%;border:2px dotted #9cffff;animation:spin 12s linear infinite reverse}
+.arc5{inset:36%;border:3px solid #4ad7ff;border-left-color:transparent;border-bottom-color:transparent;animation:spin 9s linear infinite}
+.orbit{inset:12%;border:1px solid #5fdfff55;transform:rotateX(64deg) rotate(-23deg);box-shadow:0 0 14px #008bff66}
+.orbit.b{inset:17%;transform:rotateY(62deg) rotate(26deg)}
+.core{width:24%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#d8ffff 0%,#6cf2ff 11%,#00a7eb 25%,#005493 53%,#001328 76%);box-shadow:0 0 30px #00cfff,0 0 65px #0088ff88;animation:breathe 4.8s ease-in-out infinite}
+.core:after{content:"";display:block;width:100%;height:100%;border-radius:50%;border:2px dotted #d5ffffaa;animation:spin 13s linear infinite}
+h1{font-size:14px;font-weight:400;letter-spacing:.32em;margin:24px 0 10px}
+p{font-size:11px;letter-spacing:.12em;color:#83b7ca;margin:0}
+@keyframes spin{to{rotate:360deg}}@keyframes breathe{0%,100%{scale:.94;filter:brightness(.85)}50%{scale:1.09;filter:brightness(1.4)}}
+@media(prefers-reduced-motion:reduce){.ticks,.arc1,.arc2,.arc3,.arc4,.arc5,.core,.core:after{animation:none}}
+</style></head><body><main class="hud" aria-label="青い多層ホログラムリング"><div class="ring outer"></div><div class="ring ticks"></div><div class="ring arc1"></div><div class="ring arc2"></div><div class="ring arc3"></div><div class="ring arc4"></div><div class="ring arc5"></div><div class="ring orbit"></div><div class="ring orbit b"></div><div class="core"></div></main><h1>J A R V I S · 0.7</h1><p>HOLOGRAPHIC INTERFACE · STANDBY</p></body></html>
